@@ -2,7 +2,9 @@ package rain;
 
 import javax.swing.JFrame;
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
 /**
@@ -62,6 +64,8 @@ public class Game extends Canvas implements Runnable
 	}
 	
 	// implements Runnable requires run() method
+	// run() method is automatically run from the thread when thread.start() is called.
+	// This works because the class implements Runnable and thread was set with this class
 	public void run()
 	{
 		while(running)
@@ -93,6 +97,20 @@ public class Game extends Canvas implements Runnable
 			createBufferStrategy(3);
 			return;
 		}
+		
+		// getDrawGraphics() creates a link between you drawing graphics to the screen and the buffer
+		Graphics g = bs.getDrawGraphics();
+		{
+			g.setColor(Color.BLACK);
+			// Fills rectangle
+			// (0,0) is the top left corner of the window in Java
+			// getWidth() & getHeight() returns the width and height of the window, comes from Component class
+			g.fillRect(0, 0, getWidth(), getHeight());
+		}
+		// Releases System Resources
+		// After updating a frame, we want to remove the previous frame
+		g.dispose();
+		bs.show(); // makes next available buffer visible
 	}
 	
 	// Main method
@@ -137,5 +155,7 @@ public class Game extends Canvas implements Runnable
  * When we render something, you'll see the pixels update live on the screen, 1 by 1, continuously.
  * This can cause graphical issues. We want to calculate the color for every pixel beforehand, 
  * store it as a buffer, and then display the image when we need it.
+ * 
+ * 
  */
 
