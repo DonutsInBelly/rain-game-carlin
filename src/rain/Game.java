@@ -116,15 +116,27 @@ public class Game extends Canvas implements Runnable
 			return;
 		}
 		
+		// Renders the screen; constantly updates the screen
+		screen.render();
+		
+		// Changes all the pixels in the frame for the Buffered Image to display
+		for(int i = 0; i<pixels.length; i++)
+		{
+			pixels[i] = screen.pixels[i];
+		}
+		
 		// getDrawGraphics() creates a link between you drawing graphics to the screen and the buffer
 		Graphics g = bs.getDrawGraphics();
-		{
-			g.setColor(Color.BLACK);
-			// Fills rectangle
-			// (0,0) is the top left corner of the window in Java
-			// getWidth() & getHeight() returns the width and height of the window, comes from Component class
-			g.fillRect(0, 0, getWidth(), getHeight());
-		}
+		// {
+		// g.setColor(Color.BLACK);
+		// // Fills rectangle
+		// // (0,0) is the top left corner of the window in Java
+		// // getWidth() & getHeight() returns the width and height of the
+		// window, comes from Component class
+		// g.fillRect(0, 0, getWidth(), getHeight());
+		// }
+		// Draws the Buffered image to the Screen (image is the Buffered Image)
+		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
 		// Releases System Resources
 		// After updating a frame, we want to remove the previous frame
 		g.dispose();
