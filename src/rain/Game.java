@@ -1,11 +1,16 @@
 package rain;
 
-import javax.swing.JFrame;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
+
+import javax.swing.JFrame;
+
+import graphics.Screen;
 
 /**
  * @author carlin
@@ -27,6 +32,16 @@ public class Game extends Canvas implements Runnable
 	private JFrame frame;// A window, a frame, to display game
 	private Thread thread;// Thread is a Java subprocess
 	
+	// Converts image object into an array of integers to signal pixels to change to respective colors
+	// BufferedImage object is an image with an accessible buffer of image data
+	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);// Main image object, final rendered view
+	// Casted to a DataBufferInt, class that returns integers
+	// Takes BufferedImage image, getRaster() returns writable raster,getDataBuffer() returns the DataBuffer of the raster
+	private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();// sets up writable raster
+	
+	// Declares Screen object for Game object
+	private Screen screen;
+	
 	// Game constructor
 	// Sets up a new instance of a Game Object
 	public Game()
@@ -35,6 +50,9 @@ public class Game extends Canvas implements Runnable
 		Dimension size = new Dimension(width*scale, height*scale);
 		// Method from Canvas that sets the size of the Canvas to the Dimension called size
 		setPreferredSize(size);
+		
+		// Creates a new instance of the Screen object
+		screen = new Screen(width, height);
 		
 		// creates a new instance of JFrame to frame
 		frame = new JFrame();
@@ -156,6 +174,9 @@ public class Game extends Canvas implements Runnable
  * This can cause graphical issues. We want to calculate the color for every pixel beforehand, 
  * store it as a buffer, and then display the image when we need it.
  * 
+ * Colors are represented by numbers, in many cases, they're represented by hexadecimal numbers.
  * 
+ * Rasters
+ * Raster is a data structure that represents a rectangular array of pixels.
  */
 
