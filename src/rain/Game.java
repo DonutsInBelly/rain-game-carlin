@@ -67,6 +67,7 @@ public class Game extends Canvas implements Runnable
 		thread.start();
 	}
 	
+	// joins threads to stop game properly
 	public synchronized void stop()	{
 		running = false;
 		try	{
