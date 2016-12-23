@@ -23,6 +23,7 @@ public class Game extends Canvas implements Runnable
 	// Serializable class (extends Canvas!), so add serialization ID
 	private static final long serialVersionUID = 1L;	
 	
+	// static so that for any Game instance created, these values don't change.
 	public static int width = 300;
 	public static int height = width/16*9;
 	public static int scale = 3;
@@ -44,8 +45,7 @@ public class Game extends Canvas implements Runnable
 	
 	// Game constructor
 	// Sets up a new instance of a Game Object
-	public Game()
-	{
+	public Game() {
 		// Sets up dimensions of the window/frame
 		Dimension size = new Dimension(width*scale, height*scale);
 		// Method from Canvas that sets the size of the Canvas to the Dimension called size
@@ -60,23 +60,19 @@ public class Game extends Canvas implements Runnable
 	
 	// Synchronized is a strategy for preventing thread interferences and memory consistency errors
 	// ensures that there's no overlap of instructions to the thread
-	public synchronized void start()
-	{
+	public synchronized void start() {
 		running = true;
 		// thread to handle the game
 		thread = new Thread(this, "Display");
 		thread.start();
 	}
 	
-	public synchronized void stop()
-	{
+	public synchronized void stop()	{
 		running = false;
-		try
-		{
+		try	{
 			thread.join();
 		} 
-		catch (InterruptedException e)
-		{
+		catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
@@ -84,10 +80,8 @@ public class Game extends Canvas implements Runnable
 	// implements Runnable requires run() method
 	// run() method is automatically run from the thread when thread.start() is called.
 	// This works because the class implements Runnable and thread was set with this class
-	public void run()
-	{
-		while(running)
-		{
+	public void run() {
+		while(running) {
 			// Update handles the logic part of the game; updates at a set speed
 			// Render handles the rendering part of the game; renders as fast as we can
 			update();
@@ -95,21 +89,18 @@ public class Game extends Canvas implements Runnable
 		}
 	}
 	
-	public void update()
-	{
+	public void update() {
 		
 	}
 	
 	// Being called as fast as we can
-	public void render()
-	{
+	public void render() {
 		// BufferStrategy to handle storing the next frame to be displayed
 		// Canvas actually has a default BufferStrategy, 
 		// so we can just access that through getBufferStrategy()
 		BufferStrategy bs = getBufferStrategy();
 		// If BufferStrategy hasn't been created, create it. (getBufferStrategy() is returning null)
-		if(bs==null)
-		{
+		if(bs==null) {
 			// Triple Buffering = 3. Basically, we can store 2 images in memory with triple buffering
 			// Helps with speed
 			createBufferStrategy(3);
@@ -120,8 +111,7 @@ public class Game extends Canvas implements Runnable
 		screen.render();
 		
 		// Changes all the pixels in the frame for the Buffered Image to display
-		for(int i = 0; i<pixels.length; i++)
-		{
+		for(int i = 0; i<pixels.length; i++) {
 			pixels[i] = screen.pixels[i];
 		}
 		
@@ -144,8 +134,7 @@ public class Game extends Canvas implements Runnable
 	}
 	
 	// Main method
-	public static void main(String[] args)
-	{
+	public static void main(String[] args) {
 		// Constructs new Game object
 		Game game = new Game();
 		
