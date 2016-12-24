@@ -30,12 +30,10 @@ public class Screen
 		if(counter % 80 == 0) ytime++;
 		// Nested for loops to iterate through all the pixels in the Screen
 		// Renders Vertically (Top Down)
-		for(int y = 0; y<height; y++)
-		{
+		for(int y = 0; y<height; y++) {
 			// handle ArrayOutOfBounds Exception
 			if (ytime >= height) break;
-			for(int x = 0; x<width; x++)
-			{
+			for(int x = 0; x<width; x++) {
 				// handle ArrayOutOfBounds Exception
 				if (xtime >= width) break;
 				// Changes pixels to be magenta?
