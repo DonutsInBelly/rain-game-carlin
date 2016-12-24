@@ -19,8 +19,8 @@ public class Screen
 	
 	// We need something to flush the buffer so that it can update whats on the screen
 	public void clear() {
-		for (int i: pixels) {
-			i = 0;
+		for (int i = 0; i < pixels.length; i++) {
+			pixels[i-1] = 0;
 		}
 	}
 	
