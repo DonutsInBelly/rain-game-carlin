@@ -108,6 +108,9 @@ public class Game extends Canvas implements Runnable
 			return;
 		}
 		
+		// Clear the screen before rendering a new image
+		screen.clear();
+		
 		// Renders the screen; constantly updates the screen
 		screen.render();
 		
