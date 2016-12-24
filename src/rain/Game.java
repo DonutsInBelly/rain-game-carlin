@@ -123,7 +123,7 @@ public class Game extends Canvas implements Runnable
 		// // Fills rectangle
 		// // (0,0) is the top left corner of the window in Java
 		// // getWidth() & getHeight() returns the width and height of the
-		// window, comes from Component class
+		// // window, comes from Component class
 		// g.fillRect(0, 0, getWidth(), getHeight());
 		// }
 		// Draws the Buffered image to the Screen (image is the Buffered Image)
