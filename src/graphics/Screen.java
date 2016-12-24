@@ -32,10 +32,10 @@ public class Screen
 		// Renders Vertically (Top Down)
 		for(int y = 0; y<height; y++) {
 			// handle ArrayOutOfBounds Exception
-			if (ytime >= height) break;
+			if (ytime >= height || ytime < 0) break;
 			for(int x = 0; x<width; x++) {
 				// handle ArrayOutOfBounds Exception
-				if (xtime >= width) break;
+				if (xtime >= width || xtime < 0) break;
 				// Changes pixels to be magenta?
 				// x + y * width is a way to access the pixels from a single dimension array
 				// width accounts for the width of the pixels in a screen; y accounts for the row.
