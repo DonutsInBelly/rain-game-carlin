@@ -116,7 +116,7 @@ public class Game extends Canvas implements Runnable
 			if (System.currentTimeMillis() - timer > 1000) {
 				// adds a second so that we find the different between the next second and current time.
 				timer += 1000;
-				System.out.println("Updates: " + updates +"\nFPS: " + frames);
+				//System.out.println("Updates: " + updates +"\nFPS: " + frames);
 				// title of the JFrame includes frames and updates
 				frame.setTitle("FPS: " + frames + ", Updates: " + updates);
 				updates = 0;
