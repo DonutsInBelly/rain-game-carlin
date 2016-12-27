@@ -82,10 +82,27 @@ public class Game extends Canvas implements Runnable
 	// run() method is automatically run from the thread when thread.start() is called.
 	// This works because the class implements Runnable and thread was set with this class
 	public void run() {
-		while(running) {
+		// Timer start
+		// Retrieve Computer's current time
+		// lastTime and now are used to get delta time
+		long lastTime = System.nanoTime();
+		// convert nanoseconds to milliseconds
+		// Divided by 60 because 1000000000 is how many nanoseconds are in a second / 60
+		// 60 determines how many times we want to update in a second
+		final double ns = 1000000000.0 / 60.0;
+		double delta = 0;
+		while (running) {
+			long now = System.nanoTime();
+			// Delta keeps track of how much of a 1/60th of a second has passed.
+			// If delta == 1 or more it means that 1/60th of a second has passed, so we can update() again. 
+			// Then it decrements delta by 1 to wait until we add enough for 1/60th of a second to pass.
+			delta += (now - lastTime) / ns;
+			while (delta >= 1) {
+				update();
+				delta--;
+			}
 			// Update handles the logic part of the game; updates at a set speed
 			// Render handles the rendering part of the game; renders as fast as we can
-			update();
 			render();
 		}
 	}
