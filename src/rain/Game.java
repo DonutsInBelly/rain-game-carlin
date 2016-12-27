@@ -86,25 +86,44 @@ public class Game extends Canvas implements Runnable
 		// Retrieve Computer's current time
 		// lastTime and now are used to get delta time
 		long lastTime = System.nanoTime();
+		long timer = System.currentTimeMillis(); // 1000 milliseconds = 1 second
 		// convert nanoseconds to milliseconds
 		// Divided by 60 because 1000000000 is how many nanoseconds are in a second / 60
 		// 60 determines how many times we want to update in a second
 		final double ns = 1000000000.0 / 60.0;
 		double delta = 0;
+		// frames keeps track of how many frames rendered every second
+		int frames = 0;
+		// update keeps track of how many times we update
+		int updates = 0;
 		while (running) {
 			long now = System.nanoTime();
 			// Delta keeps track of how much of a 1/60th of a second has passed.
 			// If delta == 1 or more it means that 1/60th of a second has passed, so we can update() again. 
 			// Then it decrements delta by 1 to wait until we add enough for 1/60th of a second to pass.
 			delta += (now - lastTime) / ns;
+			lastTime = now;
 			while (delta >= 1) {
 				update();
 				delta--;
+				updates++;
 			}
 			// Update handles the logic part of the game; updates at a set speed
 			// Render handles the rendering part of the game; renders as fast as we can
 			render();
+			frames++;
+			// Checks if 1 second has passed
+			if (System.currentTimeMillis() - timer > 1000) {
+				// adds a second so that we find the different between the next second and current time.
+				timer += 1000;
+				System.out.println("Updates: " + updates +"\nFPS: " + frames);
+				// title of the JFrame includes frames and updates
+				frame.setTitle("FPS: " + frames + ", Updates: " + updates);
+				updates = 0;
+				frames = 0;
+			}
 		}
+		stop();
 	}
 	
 	public void update() {
