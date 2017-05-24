@@ -44,7 +44,6 @@ public class Screen
 			for(int x = 0; x < width; x++) {
 				// handle ArrayOutOfBounds Exception
 				if (x >= width || x < 0) break;
-				// Changes pixels to be magenta?
 				// x + y * width is a way to access the pixels from a single dimension array
 				// width accounts for the width of the pixels in a screen; y accounts for the row.
 				// width acts as a displacement for the rows of pixels in the one dimensional array.
