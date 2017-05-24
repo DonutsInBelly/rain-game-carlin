@@ -48,7 +48,7 @@ public class Screen
 				// width accounts for the width of the pixels in a screen; y accounts for the row.
 				// width acts as a displacement for the rows of pixels in the one dimensional array.
 				// Bitwise operation instead of dividing by 16 brought a performance improvement of ~150 FPS!!!!
-				int tileIndex = (x >> 4) + (y >> 4) * 64; // 32 * 32 tiles
+				int tileIndex = (x >> 4) + (y >> 4) * 64; // 16 * 16 tiles
 				pixels[x + y * width] = tiles[tileIndex];
 			}
 		}
