@@ -39,16 +39,18 @@ public class Screen
 		// Nested for loops to iterate through all the pixels in the Screen
 		// Renders Vertically (Top Down)
 		for(int y = 0; y < height; y++) {
+			int yy = y;
 			// handle ArrayOutOfBounds Exception
-			if (y >= height || y < 0) break;
+			if (yy >= height || yy < 0) break;
 			for(int x = 0; x < width; x++) {
+				int xx = x - 16;
 				// handle ArrayOutOfBounds Exception
-				if (x >= width || x < 0) break;
+				if (xx >= width || xx < 0) break;
 				// x + y * width is a way to access the pixels from a single dimension array
 				// width accounts for the width of the pixels in a screen; y accounts for the row.
 				// width acts as a displacement for the rows of pixels in the one dimensional array.
 				// Bitwise operation instead of dividing by 16 brought a performance improvement of ~150 FPS!!!!
-				int tileIndex = (x >> 4) + (y >> 4) * 64; // 16 * 16 tiles
+				int tileIndex = (xx >> 4) + (yy >> 4) * 64; // 16 * 16 tiles
 				pixels[x + y * width] = tiles[tileIndex];
 			}
 		}
